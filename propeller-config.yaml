@@ -23,7 +23,7 @@ propeller:
       rate: 100
       capacity: 1000
   # This config assumes using `make start` in flytesnacks repo to startup a DinD k3s container
-  kube-config: "$HOME/.flyte/k3s/k3s.yaml"
+  kube-config: "/Users/kevin/.flyte/k3s/k3s.yaml"
   publish-k8s-events: true
   workflowStore:
     policy: "ResourceVersionCache"

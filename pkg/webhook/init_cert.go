@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"math/big"
 	"os"
+	"path"
 	"time"
 
 	"github.com/flyteorg/flytepropeller/pkg/controller/config"
@@ -71,6 +72,22 @@ func createWebhookSecret(ctx context.Context, namespace string, cfg *webhookConf
 		CaCertKey:            certs.CaPEM.Bytes(),
 		ServerCertKey:        certs.ServerPEM.Bytes(),
 		ServerCertPrivateKey: certs.PrivateKeyPEM.Bytes(),
+	}
+
+	if cfg.LocalCert {
+		if _, err := os.Stat(cfg.CertDir); os.IsNotExist(err) {
+			if err := os.Mkdir(cfg.CertDir, 0644); err != nil {
+				return err
+			}
+		}
+
+		if err := os.WriteFile(path.Join(cfg.CertDir, ServerCertKey), certs.ServerPEM.Bytes(), 0644); err !=nil {
+			return err
+		}
+
+		if err := os.WriteFile(path.Join(cfg.CertDir, ServerCertPrivateKey), certs.PrivateKeyPEM.Bytes(), 0644); err !=nil {
+			return err
+		}
 	}
 
 	secret := &corev1.Secret{

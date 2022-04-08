@@ -52,6 +52,7 @@ func (cfg Config) GetPFlagSet(prefix string) *pflag.FlagSet {
 	cmdFlags := pflag.NewFlagSet("Config", pflag.ExitOnError)
 	cmdFlags.String(fmt.Sprintf("%v%v", prefix, "metrics-prefix"), DefaultConfig.MetricsPrefix, "An optional prefix for all published metrics.")
 	cmdFlags.String(fmt.Sprintf("%v%v", prefix, "certDir"), DefaultConfig.CertDir, "Certificate directory to use to write generated certs. Defaults to /etc/webhook/certs/")
+	cmdFlags.Bool(fmt.Sprintf("%v%v", prefix, "localCert"), DefaultConfig.LocalCert, "write certs locally. Defaults to false")
 	cmdFlags.Int(fmt.Sprintf("%v%v", prefix, "listenPort"), DefaultConfig.ListenPort, "The port to use to listen to webhook calls. Defaults to 9443")
 	cmdFlags.String(fmt.Sprintf("%v%v", prefix, "serviceName"), DefaultConfig.ServiceName, "The name of the webhook service.")
 	cmdFlags.String(fmt.Sprintf("%v%v", prefix, "secretName"), DefaultConfig.SecretName, "Secret name to write generated certs to.")
