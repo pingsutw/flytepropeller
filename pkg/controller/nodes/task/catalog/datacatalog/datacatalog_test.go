@@ -201,7 +201,7 @@ func TestCatalog_Get(t *testing.T) {
 			Id:       "test-artifact",
 			Dataset:  sampleDataSet.Id,
 			Data:     []*datacatalog.ArtifactData{sampleArtifactData},
-			Metadata: GetArtifactMetadataForSource(taskID),
+			Metadata: GetArtifactMetadataForSource(taskID, "/tmp/deck.html"),
 			Tags: []*datacatalog.Tag{
 				{
 					Name:       "x",

@@ -191,7 +191,7 @@ func TestGetArtifactMetadataForSource(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetArtifactMetadataForSource(tt.args.taskExecutionID); !reflect.DeepEqual(got.KeyMap, tt.want) {
+			if got := GetArtifactMetadataForSource(tt.args.taskExecutionID, "/tmp/deck.html"); !reflect.DeepEqual(got.KeyMap, tt.want) {
 				t.Errorf("GetMetadataForSource() = %v, want %v", got.KeyMap, tt.want)
 			}
 		})
@@ -275,7 +275,7 @@ func TestGetSourceFromMetadata(t *testing.T) {
 			RetryAttempt: 0,
 		}},
 		// Completely available
-		{"latest", args{datasetMd: GetDatasetMetadataForSource(&tID).KeyMap, artifactMd: GetArtifactMetadataForSource(&tID).KeyMap, currentID: currentTaskID}, &tID},
+		{"latest", args{datasetMd: GetDatasetMetadataForSource(&tID).KeyMap, artifactMd: GetArtifactMetadataForSource(&tID, "/tmp/deck.html").KeyMap, currentID: currentTaskID}, &tID},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

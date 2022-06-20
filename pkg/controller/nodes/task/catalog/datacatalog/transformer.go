@@ -219,6 +219,7 @@ const (
 	execProjectKey     = "exec-project"
 	execNodeIDKey      = "exec-node"
 	execTaskAttemptKey = "exec-attempt"
+	deckURIKey         = "deck-uri"
 )
 
 // Understanding Catalog Identifiers
@@ -238,7 +239,7 @@ func GetDatasetMetadataForSource(taskExecutionID *core.TaskExecutionIdentifier) 
 	}
 }
 
-func GetArtifactMetadataForSource(taskExecutionID *core.TaskExecutionIdentifier) *datacatalog.Metadata {
+func GetArtifactMetadataForSource(taskExecutionID *core.TaskExecutionIdentifier, deckURI string) *datacatalog.Metadata {
 	if taskExecutionID == nil {
 		return &datacatalog.Metadata{}
 	}
@@ -249,6 +250,7 @@ func GetArtifactMetadataForSource(taskExecutionID *core.TaskExecutionIdentifier)
 			execNameKey:        taskExecutionID.NodeExecutionId.GetExecutionId().GetName(),
 			execNodeIDKey:      taskExecutionID.NodeExecutionId.GetNodeId(),
 			execTaskAttemptKey: strconv.Itoa(int(taskExecutionID.GetRetryAttempt())),
+			deckURIKey:         deckURI,
 		},
 	}
 }
